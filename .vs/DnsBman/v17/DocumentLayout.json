@@ -1,0 +1,319 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\services\\bmancustomerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:services\\bmancustomerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\services\\recordclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:services\\recordclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\services\\domainservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:services\\domainservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\utilities\\arubatokenhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:utilities\\arubatokenhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\data\\dnsbmancontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:data\\dnsbmancontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\models\\usersapikey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:models\\usersapikey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\models\\record.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:models\\record.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\models\\domain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:models\\domain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\controllers\\defaultadmincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:controllers\\defaultadmincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\components\\pages\\authpages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:components\\pages\\authpages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\services\\apikey\\apikeyvalidation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:services\\apikey\\apikeyvalidation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\services\\apikey\\apikeyhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:services\\apikey\\apikeyhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\services\\apikey\\apikeyauthfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:services\\apikey\\apikeyauthfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\models\\arubatoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:models\\arubatoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|c:\\users\\rocco\\source\\repos\\dnsbman\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF555D7F-31BC-4BE7-9968-903758DCA074}|DnsBman.csproj|solutionrelative:models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-23T09:47:45.469Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAFgAAAAAAAAAAAAgwCcAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T13:56:19.479Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DnsBmanContext.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Data\\DnsBmanContext.cs",
+              "RelativeDocumentMoniker": "Data\\DnsBmanContext.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Data\\DnsBmanContext.cs",
+              "RelativeToolTip": "Data\\DnsBmanContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T14:02:04.825Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ArubaToken.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Models\\ArubaToken.cs",
+              "RelativeDocumentMoniker": "Models\\ArubaToken.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Models\\ArubaToken.cs",
+              "RelativeToolTip": "Models\\ArubaToken.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T16:16:53.97Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BmanCustomerService.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Services\\BmanCustomerService.cs",
+              "RelativeDocumentMoniker": "Services\\BmanCustomerService.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Services\\BmanCustomerService.cs",
+              "RelativeToolTip": "Services\\BmanCustomerService.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAQwD0AAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T14:04:41.14Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CustomersController.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Controllers\\CustomersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CustomersController.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Controllers\\CustomersController.cs",
+              "RelativeToolTip": "Controllers\\CustomersController.cs",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAwwEsAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T14:05:10.033Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ArubaTokenHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Utilities\\ArubaTokenHandler.cs",
+              "RelativeDocumentMoniker": "Utilities\\ArubaTokenHandler.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Utilities\\ArubaTokenHandler.cs",
+              "RelativeToolTip": "Utilities\\ArubaTokenHandler.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAA1wAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T16:24:50.226Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DomainService.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Services\\DomainService.cs",
+              "RelativeDocumentMoniker": "Services\\DomainService.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Services\\DomainService.cs",
+              "RelativeToolTip": "Services\\DomainService.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAowB0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T14:04:26.489Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RecordClientService.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Services\\RecordClientService.cs",
+              "RelativeDocumentMoniker": "Services\\RecordClientService.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Services\\RecordClientService.cs",
+              "RelativeToolTip": "Services\\RecordClientService.cs",
+              "ViewState": "AQIAADgAAAAAAAAAAAAwwB8AAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T14:04:19.776Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DefaultAdminController.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Controllers\\DefaultAdminController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DefaultAdminController.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Controllers\\DefaultAdminController.cs",
+              "RelativeToolTip": "Controllers\\DefaultAdminController.cs",
+              "ViewState": "AQIAADMAAAAAAAAAAAAowE4AAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T16:14:39.202Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Domain.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Models\\Domain.cs",
+              "RelativeDocumentMoniker": "Models\\Domain.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Models\\Domain.cs",
+              "RelativeToolTip": "Models\\Domain.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T16:16:19.576Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Record.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Models\\Record.cs",
+              "RelativeDocumentMoniker": "Models\\Record.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Models\\Record.cs",
+              "RelativeToolTip": "Models\\Record.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T16:16:31.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UsersApiKey.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Models\\UsersApiKey.cs",
+              "RelativeDocumentMoniker": "Models\\UsersApiKey.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Models\\UsersApiKey.cs",
+              "RelativeToolTip": "Models\\UsersApiKey.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T16:16:36.802Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Customer.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Models\\Customer.cs",
+              "RelativeDocumentMoniker": "Models\\Customer.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Models\\Customer.cs",
+              "RelativeToolTip": "Models\\Customer.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T16:16:42.495Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ApiKeyAuthFilter.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Services\\ApiKey\\ApiKeyAuthFilter.cs",
+              "RelativeDocumentMoniker": "Services\\ApiKey\\ApiKeyAuthFilter.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Services\\ApiKey\\ApiKeyAuthFilter.cs",
+              "RelativeToolTip": "Services\\ApiKey\\ApiKeyAuthFilter.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T16:17:15.944Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ApiKeyHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Services\\ApiKey\\ApiKeyHandler.cs",
+              "RelativeDocumentMoniker": "Services\\ApiKey\\ApiKeyHandler.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Services\\ApiKey\\ApiKeyHandler.cs",
+              "RelativeToolTip": "Services\\ApiKey\\ApiKeyHandler.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T16:17:21.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ApiKeyValidation.cs",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Services\\ApiKey\\ApiKeyValidation.cs",
+              "RelativeDocumentMoniker": "Services\\ApiKey\\ApiKeyValidation.cs",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Services\\ApiKey\\ApiKeyValidation.cs",
+              "RelativeToolTip": "Services\\ApiKey\\ApiKeyValidation.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABQAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T16:17:23.355Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Login.razor",
+              "DocumentMoniker": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Components\\Pages\\AuthPages\\Login.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\AuthPages\\Login.razor",
+              "ToolTip": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\Components\\Pages\\AuthPages\\Login.razor",
+              "RelativeToolTip": "Components\\Pages\\AuthPages\\Login.razor",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAACQAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T09:30:32.616Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

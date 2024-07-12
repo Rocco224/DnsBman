@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DnsBman.bundle.scp.css",
+      "PackagePath": "staticwebassets\\DnsBman.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Rocco\\source\\repos\\DnsBman\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DnsBman.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.DnsBman.props",
+      "PackagePath": "build\\DnsBman.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.DnsBman.props",
+      "PackagePath": "buildMultiTargeting\\DnsBman.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.DnsBman.props",
+      "PackagePath": "buildTransitive\\DnsBman.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

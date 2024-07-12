@@ -1,0 +1,120 @@
+﻿@page "/customers/details"
+
+@rendermode InteractiveServer
+
+@using DnsBman.Components.Alerts
+@using DnsBman.Components.Modals
+@using DnsBman.Models
+@using DnsBman.Models.IdentityModels
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Authorization
+@using Serilog
+
+@inject DnsBman.Data.DnsBmanContext _context
+@inject NavigationManager _navigationManager
+@inject UserManager<ApplicationUser> _userManager
+@inject DnsBman.Services.BmanCustomerService _bmanCustomerService
+
+
+@attribute [Authorize]
+
+<PageTitle>Informazioni Clienti Bman</PageTitle>
+
+<div>
+    @if (customer is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-xl-6 mx-auto my-5">
+                    <div class="card bg-secondary bg-opacity-10 shadow-sm">
+                        <div class="card-header text-end">
+                            <button title="Elimina cliente" class="btn btn-danger shadow-sm my-1" @onclick="ShowModal"><i class="bi bi-trash3-fill"></i></button>
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-title">Informazioni cliente Bman</h2>
+                            <dl class="row mt-4">
+                                <dt class="col-4">Nome:</dt>
+                                <dd class="col-8">@customer.Name</dd>
+                                <dt class="col-4">Valore Bman.It:</dt>
+                                <dd class="col-8">@customer.ValueBmanIt</dd>
+                                <dt class="col-4">Valore Bman.Shop:</dt>
+                                <dd class="col-8">@customer.ValueBmanShop</dd>
+                                <dt class="col-4">Data creazione:</dt>
+                                <dd class="col-8">@customer.CreationDate</dd>
+                                <dt class="col-4">Ultima modifica:</dt>
+                                <dd class="col-8">@customer.ModificationDate</dd>
+                            </dl>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <a title="Lista clienti" class="btn btn-primary shadow-sm" href="customers"><i class="bi bi-arrow-left"></i></a>
+                            <a title="Modifica cliente" class="btn btn-primary shadow-sm my-1" href="@($"customers/edit?id={customer.Id}")"><i class="bi bi-pen-fill"></i></a>
+                        </div>
+                    </div>
+
+                    <Alert Message="@AlertMessage" Type="error" />
+                    
+                </div>
+            </div>
+        </div>
+
+        <Modal @ref="modal" Title="Attenzione!" OnSave="DeleteCustomer">
+            <p>Sei sicuro di voler eliminare questo cliente?</p>
+        </Modal>
+    }
+</div>
+
+@code {
+    private string? AlertMessage { get; set; }
+
+    Customer? customer;
+    Modal? modal;
+
+    [SupplyParameterFromQuery]
+    public int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            customer = await _context.Customers.FirstOrDefaultAsync(m => m.Id == Id);
+
+            if (customer is null)
+            {
+                _navigationManager.NavigateTo("notfound");
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Si è verificato un errore durante l'inizializzazione della pagina cliente.");
+            AlertMessage = ex.Message;
+        }
+    }
+
+    void ShowModal()
+    {
+        modal.Show();
+    }
+
+    public async Task DeleteCustomer()
+    {
+        try
+        {
+            if (await _bmanCustomerService.IsCustomerEliminated(customer))
+            {
+                _context.Customers.Remove(customer!);
+                await _context.SaveChangesAsync();
+                _navigationManager.NavigateTo("/customers?message=Cliente%20eliminato%20con%20successo!", forceLoad: true);
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Si è verificato un errore durante l'eliminazione del cliente: {@Customer}", customer);
+            AlertMessage = ex.Message;
+        }
+    }
+}

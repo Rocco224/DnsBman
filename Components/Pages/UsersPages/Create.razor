@@ -1,0 +1,132 @@
+﻿@page "/users/create"
+
+@rendermode InteractiveServer
+
+@using DnsBman.Components.Alerts
+@using DnsBman.Services.ApiKey
+@using DnsBman.Models
+@using DnsBman.Models.IdentityModels
+@using DnsBman.Models.ViewModels
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Identity
+@using Serilog
+
+@inject DnsBman.Data.DnsBmanContext _context
+@inject NavigationManager _navigationManager
+@inject RoleManager<ApplicationRole> _roleManager
+@inject UserManager<ApplicationUser> _userManager
+@inject DnsBman.Services.BmanCustomerService _bmanCustomerService
+@inject ApiKeyHandler _apiKeyHandler
+
+@attribute [Authorize(Roles = "Admin")]
+
+<PageTitle>Crea utente</PageTitle>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-lg-8 col-xl-5 mx-auto my-5">
+            <EditForm class="p-3 border border-2 bg-secondary bg-opacity-10 shadow-sm" method="post" Model="RegisterModel" OnValidSubmit="AddUser" FormName="register" Enhance>
+                <DataAnnotationsValidator />
+                <h2 class="text-center mb-3">Crea utente</h2>
+                <hr />
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <InputText id="email" @bind-Value="RegisterModel.Email" type="email" class="form-control" style="background-color: #F8F8FF;" required/>
+                    <ValidationMessage For="() => RegisterModel.Email" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Username:</label>
+                    <InputText id="name" @bind-Value="RegisterModel.Username" type="text" class="form-control" style="background-color: #F8F8FF;" required/>
+                    <ValidationMessage For="() => RegisterModel.Username" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <InputText id="password" @bind-Value="RegisterModel.Password" type="password" class="form-control" style="background-color: #F8F8FF;" />
+                    <ValidationMessage For="() => RegisterModel.Password" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Conferma password:</label>
+                    <InputText id="confirmPassword" @bind-Value="RegisterModel.ConfirmPassword" type="password" class="form-control" style="background-color: #F8F8FF;" />
+                    <ValidationMessage For="() => RegisterModel.ConfirmPassword" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ruolo:</label>
+                    <InputRadioGroup @bind-Value="RegisterModel.Role">
+                        <div>
+                            <InputRadio Value="User" id="userRadio" />
+                            <label for="userRadio">User</label>
+                        </div>
+                        <div>
+                            <InputRadio Value="Admin" id="adminRadio" />
+                            <label for="adminRadio">Admin</label>
+                        </div>
+                    </InputRadioGroup>
+                </div>
+                <hr />
+                <div class="d-flex justify-content-between align-items-center">
+                    <a title="Lista utenti" class="btn btn-primary shadow-sm" href="users"><i class="bi bi-arrow-left"></i></a>
+                    <button title="Crea utente" type="submit" class="btn btn-success" disabled="@IsLoading">
+                        @if (IsLoading)
+                        {
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <span class="visually-hidden">Loading...</span>
+                        }
+                        else
+                        {
+                            <i class="bi bi-check-lg"></i>
+                        }
+                    </button>
+                </div>
+            </EditForm>
+
+            <Alert Message="@AlertMessage" Type="error" />
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [SupplyParameterFromForm]
+    private RegisterViewModel RegisterModel { get; set; } = new() { Role = "User" };
+    private string Admin { get; set; } = "Admin";
+    private string User { get; set; } = "User";
+    private bool IsLoading { get; set; } = false;
+    private string? AlertMessage { get; set; }
+
+    private async Task AddUser()
+    {
+        try
+        {
+            IsLoading = true;
+
+            var user = new ApplicationUser { UserName = RegisterModel.Username, Email = RegisterModel.Email };
+            var result = await _userManager.CreateAsync(user, RegisterModel.Password);
+
+            if (result.Succeeded)
+            {
+                if (!await _roleManager.RoleExistsAsync(RegisterModel.Role))
+                {
+                    await _roleManager.CreateAsync(new ApplicationRole { Name = RegisterModel.Role });
+                }
+                await _userManager.AddToRoleAsync(user, RegisterModel.Role);
+
+                await _apiKeyHandler.AssignApiKeyToUser(user);
+
+                _navigationManager.NavigateTo("/users?message=Utente%20creato%20con%20successo!", forceLoad: true);
+            }
+            else
+            {
+                AlertMessage = "Creazione utente fallita";
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Si è verificato un errore durante l'aggiunta dell'utente.");
+            AlertMessage = ex.Message;
+        }
+        finally
+        {
+            IsLoading = false; 
+        }
+    }
+}

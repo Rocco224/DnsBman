@@ -1,0 +1,17 @@
+﻿@page "/"
+
+@rendermode InteractiveServer
+
+@using DnsBman.Services
+@using Microsoft.AspNetCore.Components.Authorization
+
+@inject NavigationManager _navigationManager
+
+<PageTitle>Home</PageTitle>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        _navigationManager.NavigateTo("/customers");
+    }
+}

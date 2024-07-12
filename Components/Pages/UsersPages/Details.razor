@@ -1,0 +1,132 @@
+﻿@page "/users/details"
+
+@rendermode InteractiveServer
+
+@using DnsBman.Components.Alerts
+@using DnsBman.Components.Modals
+@using DnsBman.Models
+@using DnsBman.Models.IdentityModels
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Authorization
+@using Serilog
+
+@inject DnsBman.Data.DnsBmanContext _context
+@inject NavigationManager _navigationManager
+@inject UserManager<ApplicationUser> _userManager
+@inject IHttpContextAccessor _httpContextAccessor
+
+@attribute [Authorize(Roles = "Admin")]
+
+<PageTitle>Informazioni utente</PageTitle>
+
+<div>
+    @if (user is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-xl-6 mx-auto my-5">
+                    <div class="card bg-secondary bg-opacity-10 shadow-sm">
+                        <div class="card-header text-end">
+                            <button title="Elimina utente" class="btn btn-danger shadow-sm my-1" @onclick="ShowModal" @attributes="DisableDeleteButtonAttributes"><i class="bi bi-trash3-fill"></i></button>
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-title">Informazioni utente</h2>
+                            <dl class="row mt-4">
+                                <dt class="col-3">Id:</dt>
+                                <dd class="col-9">@user.Id</dd>
+                                <dt class="col-3">Username:</dt>
+                                <dd class="col-9">@user.UserName</dd>
+                                <dt class="col-3">Email:</dt>
+                                <dd class="col-9">@user.Email</dd>
+                                <dt class="col-3">Ruolo:</dt>
+                                <dd class="col-9">
+                                    @foreach (var role in UserRoles)
+                                    {
+                                        @role
+                                    }
+                                </dd>
+                                <dt class="col-3">ApiKey:</dt>
+                                <dd class="col-9">@apiKey.Value</dd>
+                            </dl>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <a title="Lista utenti" class="btn btn-primary shadow-sm" href="users"><i class="bi bi-arrow-left"></i></a>
+                            <a title="Modifica utente" class="btn btn-primary shadow-sm my-1" href="@($"users/edit?id={user.Id}")"><i class="bi bi-pen-fill"></i></a>
+                        </div>
+                    </div>
+
+                    <Alert Message="@AlertMessage" Type="error" />
+                    
+                </div>
+            </div>
+        </div>
+
+        <Modal @ref="modal" Title="Attenzione!" OnSave="DeleteUser">
+            <p>Sei sicuro di voler eliminare questo utente?</p>
+        </Modal>
+    }
+</div>
+
+@code {
+    private string? AlertMessage { get; set; }
+    private bool IsCurrentUser => user != null && _userManager.GetUserId(_httpContextAccessor.HttpContext.User) == user.Id;
+    private Dictionary<string, object> DisableDeleteButtonAttributes => IsCurrentUser ? new Dictionary<string, object> { { "disabled", "disabled" } } : new Dictionary<string, object>();
+
+    ApplicationUser? user;
+    UsersApiKey? apiKey;
+    Modal? modal;
+
+    [SupplyParameterFromQuery]
+    public string? Id { get; set; }
+
+    private List<string> UserRoles { get; set; } = new List<string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            user = await _context.Users.FirstOrDefaultAsync(u => u.Id == Id);
+            apiKey = await _context.UsersApiKeys.FirstOrDefaultAsync(k => k.IdUser == user.Id);
+
+            if (user is null)
+            {
+                _navigationManager.NavigateTo("notfound");
+            }
+
+            var roles = await _userManager.GetRolesAsync(user);
+            UserRoles.AddRange(roles);
+
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Si è verificato un errore durante l'inizializzazione della pagina utente.");
+            AlertMessage = ex.Message;
+        }
+    }
+
+    void ShowModal()
+    {
+        modal.Show();
+    }
+
+    public async Task DeleteUser()
+    {
+        try
+        {
+            _context.Users.Remove(user!);
+            await _context.SaveChangesAsync();
+            _navigationManager.NavigateTo("/users?message=Utente%20eliminato%20con%20successo!", forceLoad: true);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Si è verificato un errore durante l'eliminazione dell'utente {UserId}.", Id);
+            AlertMessage = ex.Message;
+        }
+    }
+}

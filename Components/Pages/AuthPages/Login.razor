@@ -1,0 +1,91 @@
+﻿@page "/login"
+
+@using DnsBman.Components.Alerts
+@using DnsBman.Models.IdentityModels
+@using DnsBman.Models.ViewModels
+@using Microsoft.AspNetCore.Identity
+@using Serilog
+
+@inject NavigationManager _navigationManager
+@inject SignInManager<ApplicationUser> _signInManager
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-lg-6 col-xl-4 mx-auto my-5">
+            <EditForm class="p-3 border border-2 bg-secondary bg-opacity-10 shadow-sm" method="post" Model="LoginModel" OnValidSubmit="LoginUser" FormName="login" Enhance>
+                <DataAnnotationsValidator />
+                <h2 class="text-center mb-3">Login</h2>
+                <hr />
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username:</label>
+                    <InputText type="text" id="username" @bind-Value="LoginModel.Username" class="form-control" style="background-color: #F8F8FF;" />
+                    <ValidationMessage For="() => LoginModel.Username" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <InputText id="password" type="password" @bind-Value="LoginModel.Password" class="form-control" style="background-color: #F8F8FF;" />
+                    <ValidationMessage For="() => LoginModel.Password" class="text-danger" />
+                </div>
+                <hr />
+                <div class="text-end">
+                    <button title="Vai" type="submit" class="btn btn-primary" disabled="@IsLoading">
+                        @if (IsLoading)
+                        {
+                            <i class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></i>
+                            <span class="visually-hidden">Loading...</span>
+                        }
+                        else
+                        {
+                            <i class="bi bi-check-lg"></i>
+                        }
+                    </button>
+                </div>
+            </EditForm>
+
+            <Alert Message="@AlertMessage" Type="error" />
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [SupplyParameterFromForm]
+    private LoginViewModel LoginModel { get; set; } = new();
+    private bool IsLoading { get; set; } = false;
+    private string AlertMessage { get; set; }
+    private bool loginSuccess = false;
+
+    private async Task LoginUser()
+    {
+        try
+        {
+            IsLoading = true;
+
+            var result = await _signInManager.PasswordSignInAsync(LoginModel.Username, LoginModel.Password, false, false);
+
+            if (result.Succeeded)
+            {
+                loginSuccess = true;
+            }
+            else
+            {
+                AlertMessage = "Login fallito, perfavore controlla le tue credenziali e prova di nuovo";
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Errore durante il tentativo di accesso dell'utente con username {Username}", LoginModel.Username);
+            AlertMessage = ex.Message;
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+
+        if (loginSuccess)
+        {
+            _navigationManager.NavigateTo("/");
+        }
+    }
+}
+

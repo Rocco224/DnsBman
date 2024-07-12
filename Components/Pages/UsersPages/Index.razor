@@ -1,0 +1,115 @@
+﻿@page "/users"
+
+@rendermode InteractiveServer
+
+@using DnsBman.Components.Alerts
+@using DnsBman.Models.IdentityModels
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using DnsBman.Models
+@using Microsoft.AspNetCore.Authorization
+@using Serilog
+
+@inject DnsBman.Data.DnsBmanContext _context
+@inject NavigationManager _navigationManager
+
+@attribute [Authorize(Roles = "Admin")]
+
+<PageTitle>Utenti</PageTitle>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-xl-6 mx-auto my-5">
+
+            <div class="d-flex justify-content-between align-items-center border border-2 bg-secondary bg-opacity-10 shadow-sm mb-3">
+                <h2 class="ms-3 my-2">Utenti</h2>
+                <input id="search" type="text" class="w-25 form-control" @bind="SearchTerm" @onkeypress="HandleKeyPress" placeholder="Cerca..." style="background-color: #F8F8FF;" />
+                <a title="Aggiungi utente" class="btn btn-success shadow-sm m-2 me-4" href="users/create"><i class="bi bi-plus-lg"></i></a>
+            </div>
+
+            <Alert Message="@AlertMessage" Type="success" />
+
+            <QuickGrid Class="table table-striped border border-2 bg-secondary bg-opacity-10 shadow-sm align-middle" Items="Users" Pagination="pagination">
+                <PropertyColumn title="Username" Class="ps-3" Property="user => user.UserName" />
+
+                <TemplateColumn Class="text-end" Context="user">
+                    <a title="Info utente" class="btn btn-primary shadow-sm my-1" href="@($"users/details?id={user.Id}")"><i class="bi bi-info-lg"></i></a>
+                </TemplateColumn>
+            </QuickGrid>
+
+            <Paginator State="pagination" />
+
+        </div>
+    </div>
+</div>
+
+@code {
+    private string? AlertMessage { get; set; }
+    private IQueryable<ApplicationUser> Users { get; set; }
+    private string SearchTerm { get; set; } = "";
+
+    PaginationState pagination = new PaginationState { ItemsPerPage = 8 };
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            Users = _context.Users;
+
+            var uri = _navigationManager.ToAbsoluteUri(_navigationManager.Uri);
+            var query = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
+            if (query.ContainsKey("message"))
+            {
+                var queryMessage = query["message"];
+                if (!string.IsNullOrEmpty(queryMessage))
+                {
+                    AlertMessage = queryMessage;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Si è verificato un errore durante l'inizializzazione.");
+            AlertMessage = ex.Message;
+        }
+    }
+
+    private async Task Search()
+    {
+        try
+        {
+            await Task.Delay(100);
+            if (string.IsNullOrWhiteSpace(SearchTerm))
+            {
+                Users = _context.Users;
+            }
+            else
+            {
+                Users = Users.Where(customer => customer.UserName.Contains(SearchTerm));
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Si è verificato un errore durante la ricerca.");
+            AlertMessage = ex.Message;
+        }
+    }
+
+    private async Task HandleKeyPress(KeyboardEventArgs e)
+    {
+        try
+        {
+            if (e.Key == "Enter")
+            {
+                await Search();
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Si è verificato un errore durante la gestione del tasto.");
+            AlertMessage = ex.Message;
+        }
+    }
+}
+
+
+

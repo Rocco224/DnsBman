@@ -1,0 +1,46 @@
+﻿@if (!string.IsNullOrEmpty(Message))
+{
+    <div class="alert alert-@Class d-flex align-items-center my-3 shadow-sm" role=alert>
+        <i class="bi bi-@Icon-fill me-3"></i>
+        <div>
+            @Message
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string Message { get; set; }
+    [Parameter]
+    public string Type { get; set; }
+
+    private string Class { get; set; }
+    private string Icon { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        switch (Type)
+        {
+            case "info":
+                Class = "primary";
+                Icon = "info-circle";
+                break;
+            case "success":
+                Class = "success";
+                Icon = "check-circle";
+                break;
+            case "warning":
+                Class = "warning";
+                Icon = "exclamation-triangle";
+                break;
+            case "error":
+                Class = "danger";
+                Icon = "exclamation-triangle";
+                break;
+            default:
+                // code block
+                break;
+        }
+    }
+
+}

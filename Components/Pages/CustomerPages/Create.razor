@@ -1,0 +1,91 @@
+﻿@page "/customers/create"
+
+@rendermode InteractiveServer
+
+@using DnsBman.Components.Alerts
+@using DnsBman.Models
+@using Microsoft.AspNetCore.Authorization
+@using Serilog
+
+@inject DnsBman.Data.DnsBmanContext _context
+@inject NavigationManager _navigationManager
+@inject DnsBman.Services.BmanCustomerService _bmanCustomerService
+
+@attribute [Authorize]
+
+<PageTitle>Aggiungi Cliente Bman</PageTitle>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-lg-8 col-xl-5 mx-auto my-5">
+            <EditForm class="p-3 border border-2 bg-secondary bg-opacity-10 shadow-sm" method="post" Model="Customer" OnValidSubmit="AddCustomer" FormName="create" Enhance>
+                <DataAnnotationsValidator />
+                <h2 class="text-center mb-3">Aggiungi cliente Bman</h2>
+                <hr />
+                <div class="mb-3">
+                    <label for="name" class="form-label">CNAME:</label>
+                    <InputText id="name" @bind-Value="Customer.Name" class="form-control" style="background-color: #F8F8FF;" />
+                    <ValidationMessage For="() => Customer.Name" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="valuebmanit" class="form-label">Valore Bman.It:</label>
+                    <InputText id="valuebmanit" @bind-Value="Customer.ValueBmanIt" class="form-control" style="background-color: #F8F8FF;" />
+                    <ValidationMessage For="() => Customer.ValueBmanIt" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="valuebmanshop" class="form-label">Valore Bman.Shop:</label>
+                    <InputText id="valuebmanshop" @bind-Value="Customer.ValueBmanShop" class="form-control" style="background-color: #F8F8FF;" placeholder="Inserire se diverso da Bman.it"/>
+                    <ValidationMessage For="() => Customer.ValueBmanShop" class="text-danger" />
+                </div>
+                <hr />
+                <div class="d-flex justify-content-between align-items-center">
+                    <a title="Lista clienti" class="btn btn-primary shadow-sm" href="customers"><i class="bi bi-arrow-left"></i></a>
+                    <button title="Crea cliente" type="submit" class="btn btn-success" disabled="@IsLoading">
+                        @if (IsLoading)
+                        {
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <span class="visually-hidden">Loading...</span>
+                        }
+                        else
+                        {
+                            <i class="bi bi-check-lg"></i>
+                        }
+                    </button>
+                </div>
+            </EditForm>
+
+            <Alert Message="@AlertMessage" Type="error" />
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [SupplyParameterFromForm]
+    public Customer Customer { get; set; } = new();
+    private bool IsLoading { get; set; } = false;
+    private string? AlertMessage { get; set; }
+
+    public async Task AddCustomer()
+    {
+        try
+        {
+            IsLoading = true;
+
+            Customer = await _bmanCustomerService.AddCustomer(Customer);
+
+            _context.Customers.Add(Customer);
+            await _context.SaveChangesAsync();
+            _navigationManager.NavigateTo("/customers?message=Cliente%20aggiunto%20con%20successo!", forceLoad: true);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Si è verificato un errore durante l'aggiunta del cliente: {@Customer}", Customer);
+            AlertMessage = ex.Message;
+        }
+        finally
+        {
+            IsLoading = false; // Disattiva il caricamento
+        }
+    }
+}

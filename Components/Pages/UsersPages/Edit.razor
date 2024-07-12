@@ -1,0 +1,152 @@
+﻿@page "/users/edit"
+
+@rendermode InteractiveServer
+
+@using DnsBman.Components.Alerts
+@using DnsBman.Models
+@using DnsBman.Models.IdentityModels
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Authorization
+@using Serilog
+
+@inject DnsBman.Data.DnsBmanContext _context
+@inject NavigationManager _navigationManager
+@inject UserManager<ApplicationUser> _userManager
+
+@attribute [Authorize(Roles = "Admin")]
+
+<PageTitle>Modifica Utente</PageTitle>
+
+@if (User is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 col-xl-5 mx-auto my-5">
+                <EditForm class="p-3 border border-2 bg-secondary bg-opacity-10 shadow-sm" method="post" Model="User" OnValidSubmit="UpdateUser" FormName="edit" Enhance>
+                    <DataAnnotationsValidator />
+                    <h2 class="text-center mb-3">Modifica utente</h2>
+                    <hr />
+                    <input type="hidden" name="User.Id" value="@User.Id" />
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username:</label>
+                        <InputText type="text" id="username" @bind-Value="User.UserName" class="form-control" style="background-color: #F8F8FF;" />
+                        <ValidationMessage For="() => User.UserName" class="text-danger" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <InputText type="email" id="email" @bind-Value="User.Email" class="form-control" style="background-color: #F8F8FF;" />
+                        <ValidationMessage For="() => User.Email" class="text-danger" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Nuova Password:</label>
+                        <InputText type="password" id="password" @bind-Value="NewPassword" class="form-control" style="background-color: #F8F8FF;" />
+                        <ValidationMessage For="() => NewPassword" class="text-danger" />
+                    </div>
+
+                    <hr />
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a title="Info utente" class="btn btn-primary shadow-sm" href="@($"users/details?id={User.Id}")"><i class="bi bi-arrow-left"></i></a>
+                        <button title="Conferma modifiche" type="submit" class="btn btn-success" disabled="@IsLoading">
+                            @if (IsLoading)
+                            {
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <span class="visually-hidden">Loading...</span>
+                            }
+                            else
+                            {
+                                <i class="bi bi-check-lg"></i>
+                            }
+                        </button>
+                    </div>
+                </EditForm>
+
+                <Alert Message="@AlertMessage" Type="error" />
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [SupplyParameterFromQuery]
+    public string? Id { get; set; }
+
+    [SupplyParameterFromForm]
+    public ApplicationUser? User { get; set; }
+    private string? NewPassword { get; set; }
+    private bool IsLoading { get; set; } = false;
+    private string? AlertMessage { get; set; }
+
+    private bool initialized = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            User ??= await _context.Users.FirstOrDefaultAsync(u => u.Id == Id);
+
+            if (User is null)
+            {
+                _navigationManager.NavigateTo("notfound");
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Si è verificato un errore durante l'inizializzazione.");
+            AlertMessage = ex.Message;
+        }
+    }
+
+    public async Task UpdateUser()
+    {
+        try
+        {
+            IsLoading = true;
+
+            if (NewPassword != null)
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(User);
+                var result = await _userManager.ResetPasswordAsync(User, token, NewPassword);
+            }
+
+            _context.Attach(User!).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CustomerExists(User!.Id))
+                {
+                    _navigationManager.NavigateTo("notfound");
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            _navigationManager.NavigateTo("/users?message=Utente%20modificato%20con%20successo!", forceLoad: true);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Si è verificato un errore durante l'aggiornamento dell'utente: {@User}", User);
+            AlertMessage = ex.Message;
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    bool CustomerExists(string id)
+    {
+        return _context.Users.Any(e => e.Id == id);
+    }
+}
+

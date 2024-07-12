@@ -1,0 +1,113 @@
+﻿@page "/customers"
+
+@rendermode InteractiveServer
+
+@using DnsBman.Components.Alerts
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using DnsBman.Models
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.EntityFrameworkCore
+@using Serilog
+
+@inject DnsBman.Data.DnsBmanContext _context
+@inject NavigationManager _navigationManager
+
+@attribute [Authorize]
+
+<PageTitle>Clienti Bman</PageTitle>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-xl-8 mx-auto my-3">
+
+            <div class="d-flex justify-content-between align-items-center border border-2 bg-secondary bg-opacity-10 shadow-sm mb-3">
+                <h2 class="ms-3 my-2">Clienti Bman</h2>
+                <input id="search" type="text" class="w-25 form-control" @bind="SearchTerm" @onkeypress="HandleKeyPress" placeholder="Cerca..." style="background-color: #F8F8FF;" />
+                <a title="Aggiungi cliente" class="btn btn-success shadow-sm m-2 me-4" href="customers/create"><i class="bi bi-plus-lg"></i></a>
+            </div>
+
+            <Alert Message="@AlertMessage" Type="success" />
+
+            <QuickGrid Class="table table-striped border border-2 bg-secondary bg-opacity-10 shadow-sm align-middle" Items="Customers" Pagination="pagination">
+                <PropertyColumn Class="ps-3" title="Id" Sortable="true" Property="customer => customer.Id" />
+                <PropertyColumn Class="ps-3" title="Nome" Sortable="true" Property="customer => customer.Name" />
+
+                <TemplateColumn Class="text-end" Context="customer">
+                    <a title="Info cliente" class="btn btn-primary shadow-sm my-1" href="@($"customers/details?id={customer.Id}")"><i class="bi bi-info-lg"></i></a>
+                </TemplateColumn>
+            </QuickGrid>
+
+            <Paginator State="pagination" />
+        </div>
+    </div>
+</div>
+
+@code {
+    private string? AlertMessage { get; set; }
+    private IQueryable<Customer> Customers { get; set; }
+    private string SearchTerm { get; set; } = "";
+
+    PaginationState pagination = new PaginationState { ItemsPerPage = 25 };
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            Customers = _context.Customers;
+            var uri = _navigationManager.ToAbsoluteUri(_navigationManager.Uri);
+            var query = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
+            if (query.ContainsKey("message"))
+            {
+                var queryMessage = query["message"];
+                if (!string.IsNullOrEmpty(queryMessage))
+                {
+                    AlertMessage = queryMessage;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Si è verificato un errore durante l'inizializzazione.");
+            AlertMessage = ex.Message;
+        }
+
+    }
+
+    private async Task Search()
+    {
+        try
+        {
+            await Task.Delay(100);
+            if (string.IsNullOrWhiteSpace(SearchTerm))
+            {
+                Customers = _context.Customers;
+            }
+            else
+            {
+                Customers = Customers.Where(customer => customer.Name.Contains(SearchTerm));
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Si è verificato un errore durante la ricerca.");
+            AlertMessage = ex.Message;
+        }
+    }
+
+    private async Task HandleKeyPress(KeyboardEventArgs e)
+    {
+        try
+        {
+            if (e.Key == "Enter")
+            {
+                await Search();
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Si è verificato un errore durante la gestione del tasto.");
+            AlertMessage = ex.Message;
+        }
+    }
+}
+

@@ -1,0 +1,40 @@
+﻿<div class="modal" tabindex="-1" style="display: @DisplayStyle; background-color: rgba(0, 0, 0, 0.5)">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@Title</h5>
+                <button title="Annulla" type="button" class="btn-close" @onclick="Hide" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @ChildContent
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <button title="No" type="button" class="btn btn-danger" @onclick="Hide"><i class="bi bi-x-lg"></i></button>
+                <button title="Si" type="button" class="btn btn-success" @onclick="OnSave"><i class="bi bi-check-lg"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback OnSave { get; set; }
+
+    public string DisplayStyle { get; set; } = "none";
+
+    public void Show()
+    {
+        DisplayStyle = "block";
+    }
+
+    public void Hide()
+    {
+        DisplayStyle = "none";
+    }
+}
